@@ -1,0 +1,90 @@
+loki:
+  persistence:
+    enabled: true
+    size: 20Gi
+  serviceMonitor:
+    enabled: true
+
+promtail:
+  serviceMonitor:
+    enabled: true
+  config:
+    serverPort: 3101
+    clients:
+      - url: http://loki-headless:3100/loki/api/v1/push
+
+alertmanager:
+  ingress:
+    enabled: true
+    ingressClassName: nginx
+    annotations:
+      kubernetes.io/ingress.class: "nginx"
+      nginx.ingress.kubernetes.io/proxy-body-size: "10G"
+      nginx.ingress.kubernetes.io/rewrite-target: /
+    hosts:
+      - alertmanager.aoldacloud.com
+    tls:
+      - hosts:
+          - alertmanager.aoldacloud.com
+        secretName: wildcard-overcloud-prod-cert
+    paths:
+      - pathType: Prefix
+        path: /
+        backend:
+          service:
+            name: alertmanager
+            port:
+              number: 80
+
+grafana:
+  defaultDashboardsTimezone: Asia/Seoul
+  adminPassword: prom-operator
+  ingress:
+    enabled: true
+    ingressClassName: nginx
+    annotations:
+      kubernetes.io/ingress.class: "nginx"
+      nginx.ingress.kubernetes.io/proxy-body-size: "10G"
+      nginx.ingress.kubernetes.io/rewrite-target: /
+    hosts:
+      - grafana.aoldacloud.com
+    tls:
+      - hosts:
+          - grafana.aoldacloud.com
+        secretName: wildcard-overcloud-prod-cert
+    paths:
+      - pathType: Prefix
+        path: /
+        backend:
+          service:
+            name: grafana
+            port:
+              number: 80
+
+prometheus:
+  ingress:
+    enabled: true
+    ingressClassName: nginx
+    annotations:
+      kubernetes.io/ingress.class: "nginx"
+      nginx.ingress.kubernetes.io/proxy-body-size: "10G"
+      nginx.ingress.kubernetes.io/rewrite-target: /
+    hosts:
+      - prometheus.aoldacloud.com
+    tls:
+      - hosts:
+          - prometheus.aoldacloud.com
+        secretName: wildcard-overcloud-prod-cert
+    paths:
+      - pathType: Prefix
+        path: /
+        backend:
+          service:
+            name: prometheus
+            port:
+              number: 80
+  prometheusSpec:
+    podMonitorSelectorNilUsesHelmValues: false
+    serviceMonitorSelectorNilUsesHelmValues: false
+    retention: 5d
+    retentionSize: "10GiB"
