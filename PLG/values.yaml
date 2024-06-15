@@ -47,10 +47,10 @@ grafana:
       nginx.ingress.kubernetes.io/proxy-body-size: "10G"
       nginx.ingress.kubernetes.io/rewrite-target: /
     hosts:
-      - grafana.aoldacloud.com
+      - grafana1.aoldacloud.com
     tls:
       - hosts:
-          - grafana.aoldacloud.com
+          - grafana1.aoldacloud.com
         secretName: wildcard-overcloud-prod-cert
     paths:
       - pathType: Prefix
@@ -70,10 +70,10 @@ prometheus:
       nginx.ingress.kubernetes.io/proxy-body-size: "10G"
       nginx.ingress.kubernetes.io/rewrite-target: /
     hosts:
-      - prometheus.aoldacloud.com
+      - prometheus1.aoldacloud.com
     tls:
       - hosts:
-          - prometheus.aoldacloud.com
+          - prometheus1.aoldacloud.com
         secretName: wildcard-overcloud-prod-cert
     paths:
       - pathType: Prefix
