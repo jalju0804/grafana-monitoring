@@ -1,2 +1,1 @@
-{{- include "promtail.fullname" . }}:
-  {{- include "promtail.chart" . }}
+{{- include "promtail.chart" . }}

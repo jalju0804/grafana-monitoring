@@ -1,2 +1,1 @@
-{{- include "prometheus.fullname" . }}:
-  {{- include "prometheus.chart" . }}
+{{- include "prometheus.chart" . }}
