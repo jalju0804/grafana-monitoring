@@ -1,0 +1,21 @@
+minio:
+  enabled: true
+  replicas: 3
+  drivesPerNode: 1
+  persistence:
+    size: 10Gi
+  resources:
+    requests:
+      cpu: 1000m
+      memory: 1Gi
+
+loki:
+  auth_enabled: false
+
+  affinity:
+    nodeAffinity:
+      requiredDuringSchedulingIgnoredDuringExecution:
+        nodeSelectorTerms:
+          - matchExpressions:
+              - key: gpu
+                operator: DoesNotExist
