@@ -7,10 +7,10 @@ appVersion: "1.0"
 dependencies:
   - name: loki
     version: "2.7.0"
-    repository: "file://./charts"
+    repository: "file://./charts/loki"
   - name: prometheus
     version: "15.4.0"
-    repository: "file://./charts"
+    repository: "file://./charts/prometheus"
   - name: promtail
     version: "6.5.0"
-    repository: "file://./charts"
+    repository: "file://./charts/promtail"

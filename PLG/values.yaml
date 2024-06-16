@@ -88,6 +88,3 @@ prometheus:
     serviceMonitorSelectorNilUsesHelmValues: false
     retention: 5d
     retentionSize: "10GiB"
-
-service:
-  port: 80

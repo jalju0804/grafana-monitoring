@@ -1,0 +1,2 @@
+{{- include "loki.fullname" . }}:
+  {{- include "loki.chart" . }}
